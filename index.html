@@ -12,88 +12,91 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 15px;
+            -webkit-user-select: none;
         }
-        h1 { font-size: 22px; text-align: center; color: #0088cc; margin-bottom: 20px; }
+        h1 { font-size: 24px; text-align: center; color: #0088cc; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #888; font-size: 14px; margin-bottom: 25px; }
         
-        /* Сетка для работ */
+        .section-title { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin: 20px 0 15px 5px; 
+            border-left: 4px solid #0088cc; 
+            padding-left: 10px; 
+        }
+
+        /* Сетка для превью */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
         
         .work-card {
             background: #1a1a1a;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid #333;
-            transition: transform 0.2s;
+            transition: transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .work-card:active { transform: scale(0.95); } /* Эффект нажатия */
+        .work-card:active { transform: scale(0.97); }
 
         .work-card img {
             width: 100%;
-            aspect-ratio: 16/9; /* Соотношение сторон как у превью */
+            aspect-ratio: 16/9;
             object-fit: cover;
             display: block;
         }
         
-        .work-title {
-            padding: 8px;
-            font-size: 12px;
-            text-align: center;
-            background: #252525;
-        }
-
         .footer-btn {
             display: block;
             width: 100%;
             background: #0088cc;
             color: white;
             text-align: center;
-            padding: 15px 0;
-            border-radius: 12px;
+            padding: 16px 0;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 25px;
+            margin-top: 30px;
             border: none;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-    <h1>🎨 Мои работы</h1>
+    <h1>🎨 Дизайн от RiboZzZ</h1>
+    <div class="subtitle">Нажми на работу, чтобы заказать похожую</div>
 
+    <div class="section-title">🖼 YouTube Превью</div>
     <div class="portfolio-grid">
-        <div class="work-card" onclick="sendChoice('YouTube Превью')">
-            <img src="work1.jpg" alt="Превью">
-            <div class="work-title">Превью YouTube</div>
+        <div class="work-card" onclick="sendChoice('🖼 Превью')">
+            <img src="work1.jpg" alt="Превью 1">
         </div>
-
-        <div class="work-card" onclick="sendChoice('Карточки товаров')">
-            <img src="work2.jpg" alt="Карточка">
-            <div class="work-title">Ozon / WB</div>
+        <div class="work-card" onclick="sendChoice('🖼 Превью')">
+            <img src="work2.jpg" alt="Превью 2">
         </div>
-
-        <div class="work-card" onclick="sendChoice('Логотип')">
-            <img src="work3.jpg" alt="Лого">
-            <div class="work-title">Логотипы</div>
+        <div class="work-card" onclick="sendChoice('🖼 Превью')">
+            <img src="work3.jpg" alt="Превью 3">
         </div>
-
-        <div class="work-card" onclick="sendChoice('Монтаж')">
-            <img src="work4.jpg" alt="Монтаж">
-            <div class="work-title">Монтаж видео</div>
+        <div class="work-card" onclick="sendChoice('🖼 Превью')">
+            <img src="work4.jpg" alt="Превью 4">
         </div>
     </div>
 
-    <button class="footer-btn" onclick="tg.close()">Вернуться в бота</button>
+    <div class="section-title" style="opacity: 0.5;">📈 Карточки Ozon/WB (Скоро)</div>
+    <div class="section-title" style="opacity: 0.5;">🎬 Монтаж видео (Скоро)</div>
+
+    <button class="footer-btn" onclick="tg.close()">🔙 Вернуться в бота</button>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Функция отправляет название услуги обратно в бот и закрывает окно
         function sendChoice(service) {
+            // Отправляем текст боту, чтобы он запустил анкету
             tg.sendData(service);
             tg.close();
         }
