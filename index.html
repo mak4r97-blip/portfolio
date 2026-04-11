@@ -6,86 +6,95 @@
     <title>BlackRiboZzZ Portfolio</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root {
-            --tg-theme-bg-color: #0f0f0f;
-            --tg-theme-text-color: #ffffff;
-            --accent-color: #0088cc;
-        }
         body {
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
+            color: white;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 15px;
         }
-        .header { margin-bottom: 30px; }
-        .grid {
+        h1 { font-size: 22px; text-align: center; color: #0088cc; margin-bottom: 20px; }
+        
+        /* Сетка для работ */
+        .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+            gap: 12px;
         }
-        .card {
+        
+        .work-card {
             background: #1a1a1a;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid #333;
+            transition: transform 0.2s;
         }
-        .card img { width: 100%; height: auto; display: block; }
-        .card-title { padding: 10px; font-size: 14px; }
-        .btn-order {
+        .work-card:active { transform: scale(0.95); } /* Эффект нажатия */
+
+        .work-card img {
+            width: 100%;
+            aspect-ratio: 16/9; /* Соотношение сторон как у превью */
+            object-fit: cover;
+            display: block;
+        }
+        
+        .work-title {
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+            background: #252525;
+        }
+
+        .footer-btn {
             display: block;
             width: 100%;
-            padding: 15px;
-            background: var(--accent-color);
+            background: #0088cc;
             color: white;
-            border: none;
-            border-radius: 10px;
-            margin-top: 30px;
-            font-size: 16px;
+            text-align: center;
+            padding: 15px 0;
+            border-radius: 12px;
+            text-decoration: none;
             font-weight: bold;
-            cursor: pointer;
+            margin-top: 25px;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🎨 Мои Работы</h1>
-        <p>Кликай на категорию, чтобы заказать</p>
+
+    <h1>🎨 Мои работы</h1>
+
+    <div class="portfolio-grid">
+        <div class="work-card" onclick="sendChoice('YouTube Превью')">
+            <img src="work1.jpg" alt="Превью">
+            <div class="work-title">Превью YouTube</div>
+        </div>
+
+        <div class="work-card" onclick="sendChoice('Карточки товаров')">
+            <img src="work2.jpg" alt="Карточка">
+            <div class="work-title">Ozon / WB</div>
+        </div>
+
+        <div class="work-card" onclick="sendChoice('Логотип')">
+            <img src="work3.jpg" alt="Лого">
+            <div class="work-title">Логотипы</div>
+        </div>
+
+        <div class="work-card" onclick="sendChoice('Монтаж')">
+            <img src="work4.jpg" alt="Монтаж">
+            <div class="work-title">Монтаж видео</div>
+        </div>
     </div>
 
-    <div class="grid">
-        <div class="card" onclick="selectService('Превью')">
-            <img src="https://t.me/prevew/11" alt="Превью">
-            <div class="card-title">YouTube Превью</div>
-        </div>
-        <div class="card" onclick="selectService('WB/OZON карточка')">
-            <img src="https://t.me/prevew/17" alt="Карточки">
-            <div class="card-title">Ozon / WB</div>
-        </div>
-        <div class="card" onclick="selectService('Логотип')">
-            <img src="https://t.me/prevew/10" alt="Лого">
-            <div class="card-title">Логотипы</div>
-        </div>
-        <div class="card" onclick="selectService('Монтаж')">
-            <img src="https://t.me/prevew/5" alt="Монтаж">
-            <div class="card-title">Монтаж видео</div>
-        </div>
-    </div>
-
-    <button class="btn-order" onclick="closeApp()">Закрыть портфолио</button>
+    <button class="footer-btn" onclick="tg.close()">Вернуться в бота</button>
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.expand(); // Развернуть на весь экран
+        tg.expand();
 
-        function selectService(service) {
-            // Передаем данные обратно в бот (если нужно) или просто закрываем
-            tg.sendData(service); 
-            tg.close();
-        }
-
-        function closeApp() {
+        // Функция отправляет название услуги обратно в бот и закрывает окно
+        function sendChoice(service) {
+            tg.sendData(service);
             tg.close();
         }
     </script>
