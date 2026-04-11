@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackRiboZzZ Portfolio</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --tg-theme-bg-color: #0f0f0f;
+            --tg-theme-text-color: #ffffff;
+            --accent-color: #0088cc;
+        }
+        body {
+            background-color: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .header { margin-bottom: 30px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .card img { width: 100%; height: auto; display: block; }
+        .card-title { padding: 10px; font-size: 14px; }
+        .btn-order {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Мои Работы</h1>
+        <p>Кликай на категорию, чтобы заказать</p>
+    </div>
+
+    <div class="grid">
+        <div class="card" onclick="selectService('Превью')">
+            <img src="https://t.me/prevew/11" alt="Превью">
+            <div class="card-title">YouTube Превью</div>
+        </div>
+        <div class="card" onclick="selectService('WB/OZON карточка')">
+            <img src="https://t.me/prevew/17" alt="Карточки">
+            <div class="card-title">Ozon / WB</div>
+        </div>
+        <div class="card" onclick="selectService('Логотип')">
+            <img src="https://t.me/prevew/10" alt="Лого">
+            <div class="card-title">Логотипы</div>
+        </div>
+        <div class="card" onclick="selectService('Монтаж')">
+            <img src="https://t.me/prevew/5" alt="Монтаж">
+            <div class="card-title">Монтаж видео</div>
+        </div>
+    </div>
+
+    <button class="btn-order" onclick="closeApp()">Закрыть портфолио</button>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Развернуть на весь экран
+
+        function selectService(service) {
+            // Передаем данные обратно в бот (если нужно) или просто закрываем
+            tg.sendData(service); 
+            tg.close();
+        }
+
+        function closeApp() {
+            tg.close();
+        }
+    </script>
+</body>
+</html>
