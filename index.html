@@ -99,6 +99,40 @@
             border: none;
             font-size: 16px;
         }
+
+        /* Стили для формы заказа */
+        .order-form {
+            padding: 15px; 
+            background: #1a1a1a; 
+            border-radius: 12px; 
+            border: 1px solid #333;
+        }
+        .order-form select, .order-form input {
+            width: 100%; 
+            padding: 12px; 
+            background: #222; 
+            color: white; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .order-form select:focus, .order-form input:focus {
+            border-color: #0088cc;
+            outline: none;
+        }
+        .order-submit-btn {
+            width: 100%; 
+            padding: 14px; 
+            background: #0088cc; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -151,7 +185,19 @@
         </div>
     </div>
 
-    <div class="section-title" style="opacity: 0.5;">📈 Карточки Ozon/WB (Скоро)</div>
+    <div class="section-title">📦 Быстрый заказ</div>
+    <div class="order-form">
+        <select id="service-select">
+            <option value="Превью YouTube">🖼 Превью YouTube</option>
+            <option value="Карточка Ozon/WB">📊 Карточка Ozon/WB</option>
+            <option value="Монтаж видео">🎬 Монтаж видео</option>
+            <option value="Логотип">🎨 Логотип</option>
+        </select>
+        
+        <input type="text" id="deadline-input" placeholder="Желаемый дедлайн (напр. 2 дня)">
+        
+        <button class="order-submit-btn" onclick="orderNow()">Оформить заказ 🚀</button>
+    </div>
 
     <button class="footer-btn" onclick="tg.close()">🔙 Вернуться в бота</button>
 
@@ -161,6 +207,20 @@
 
         function sendChoice(service) {
             tg.sendData(service);
+            tg.close();
+        }
+
+        function orderNow() {
+            let service = document.getElementById('service-select').value;
+            let deadline = document.getElementById('deadline-input').value;
+            
+            let orderData = {
+                service: service,
+                deadline: deadline || "Не указан",
+                type: "mini_app_order"
+            };
+            
+            tg.sendData(JSON.stringify(orderData));
             tg.close();
         }
     </script>
