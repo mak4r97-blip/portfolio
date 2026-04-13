@@ -208,12 +208,31 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+        // 1. Инициализация нативной MainButton
+        tg.MainButton.setText("ОБСУДИТЬ ПРОЕКТ 💬");
+        tg.MainButton.setParams({
+            color: "#0088cc",
+            is_visible: true
+        });
+
+        // Обработка клика по нативной кнопке
+        tg.MainButton.onClick(function() {
+            tg.HapticFeedback.notificationOccurred('success');
+            tg.sendData("Нужна консультация");
+            tg.close();
+        });
+
         function sendChoice(service) {
+            // 2. Добавляем средний виброотклик при выборе работы
+            tg.HapticFeedback.impactOccurred('medium');
             tg.sendData(service);
             tg.close();
         }
 
         function orderNow() {
+            // 3. Добавляем уведомление об успехе (двойная вибрация) при заказе
+            tg.HapticFeedback.notificationOccurred('success');
+            
             let service = document.getElementById('service-select').value;
             let deadline = document.getElementById('deadline-input').value;
             
